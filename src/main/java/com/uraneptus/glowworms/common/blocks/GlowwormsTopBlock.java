@@ -1,6 +1,7 @@
 package com.uraneptus.glowworms.common.blocks;
 
 import com.uraneptus.glowworms.core.registry.BlockInit;
+import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
 import net.minecraft.block.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +31,7 @@ public class GlowwormsTopBlock extends AbstractTopPlantBlock {
         return PlantBlockHelper.isValidGrowthState(state);
     }
 
-    /*@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(5) == 0) {
             Direction direction = Direction.getRandom(random);
@@ -45,6 +46,6 @@ public class GlowwormsTopBlock extends AbstractTopPlantBlock {
                 }
             }
         }
-    }*/
+    }
 
 }

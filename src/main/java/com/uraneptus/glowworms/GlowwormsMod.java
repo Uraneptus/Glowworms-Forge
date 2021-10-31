@@ -1,6 +1,7 @@
 package com.uraneptus.glowworms;
 
 import com.uraneptus.glowworms.core.registry.BlockInit;
+import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +22,7 @@ public class GlowwormsMod
 
         BlockInit.BLOCKS.register(eventBus);
         BlockInit.ITEMS.register(eventBus);
+        ParticleTypeInit.PARTICLES.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
