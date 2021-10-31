@@ -1,0 +1,27 @@
+modLoader="javafml" #mandatory
+loaderVersion="[36,)" #mandatory
+license="All rights reserved"
+
+[[mods]] #mandatory
+modId = "glowworms" #mandatory
+version = "${file.jarVersion}" #mandatory
+logoFile = "glowworms_icon.png" #optional
+authors = "Uraneptus" #optional
+credits = "Assets by TheCraftyGhost" #optional
+displayURL = "https://www.curseforge.com/members/uraneptus/projects"
+displayName = "Glowworms" #mandatory
+description = '''
+'''
+
+[[dependencies.glowworms]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[36,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.glowworms]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
