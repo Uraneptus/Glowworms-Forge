@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "glowworms:block/glowworm_infested_stone"
+  }
+}
