@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -17,6 +18,10 @@ public class GlowwormsTopBlock extends AbstractTopPlantBlock {
 
     public GlowwormsTopBlock(AbstractBlock.Properties properties) {
         super(properties.lightLevel((p_235455_0_) -> 5), Direction.DOWN, SHAPE, false, 0.1D);
+    }
+
+    public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+        return pLevel.getBlockState(pPos.below()).is(BlockInit.BlockTags.CAN_PLACE_GLOWWORM);
     }
 
     protected int getBlocksToGrowWhenBonemealed(Random random) {

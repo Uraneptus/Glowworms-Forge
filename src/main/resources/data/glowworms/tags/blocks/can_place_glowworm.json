@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "glowworms:glowworm_infested_stone",
+    "minecraft:glowstone"
+  ]
+}
