@@ -15,7 +15,7 @@ public class GlowwormsBlock extends AbstractBodyPlantBlock {
     public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public GlowwormsBlock(Properties properties) {
-        super(properties.lightLevel((p_235464_0_) -> 7), Direction.DOWN, SHAPE, false);
+        super(properties.lightLevel((p_235464_0_) -> 8), Direction.DOWN, SHAPE, false);
     }
 
     @Override

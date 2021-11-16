@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "glowworms:glowworm_infested_stone",
-    "minecraft:glowstone"
+    "glowworms:glowworms",
+    "glowworms:glowworms_top"
   ]
 }

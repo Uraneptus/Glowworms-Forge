@@ -18,19 +18,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-public class BlockInit { //TODO Gloworms should only be placed on gloworm infected stone
+public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GlowwormsMod.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowwormsMod.MOD_ID);
 
     //Blocks
     public static final RegistryObject<Block> GLOWWORMS_TOP = BLOCKS.register("glowworms_top",
-            () -> new GlowwormsTopBlock(AbstractBlock.Properties.of(Material.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.WEEPING_VINES).emissiveRendering(BlockInit::always)));
+            () -> new GlowwormsTopBlock(AbstractBlock.Properties.of(Material.PLANT).randomTicks().noOcclusion().noCollission().instabreak().sound(SoundType.WEEPING_VINES).emissiveRendering(BlockInit::always)));
 
     public static final RegistryObject<Block> GLOWWORMS = BLOCKS.register("glowworms",
-            () -> new GlowwormsBlock(AbstractBlock.Properties.of(Material.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.WEEPING_VINES).emissiveRendering(BlockInit::always)));
+            () -> new GlowwormsBlock(AbstractBlock.Properties.of(Material.PLANT).randomTicks().noOcclusion().noCollission().instabreak().sound(SoundType.WEEPING_VINES).emissiveRendering(BlockInit::always)));
 
     public static final RegistryObject<Block> GLOWWORM_INFESTED_STONE = BLOCKS.register("glowworm_infested_stone",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).lightLevel((p_235455_0_) -> 10)));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).lightLevel((p_235455_0_) -> 6)));
 
 
     //Items
@@ -46,11 +46,12 @@ public class BlockInit { //TODO Gloworms should only be placed on gloworm infect
 
     //CUSTOM TAGS
     public static class BlockTags {
-        public static final ITag<Block> CAN_PLACE_GLOWWORM = TagCollectionManager.getInstance().getBlocks().getTag(new ResourceLocation(GlowwormsMod.MOD_ID, "can_place_glowworm"));
+        public static final ITag.INamedTag<Block> CAN_PLACE_GLOWWORM = net.minecraft.tags.BlockTags.createOptional(new ResourceLocation(GlowwormsMod.MOD_ID, "can_place_glowworm"));
     }
 
 
     private static boolean always(BlockState state, IBlockReader blockReader, BlockPos pos) {
         return true;
     }
+
 }

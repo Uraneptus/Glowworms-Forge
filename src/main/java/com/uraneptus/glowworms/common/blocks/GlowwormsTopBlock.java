@@ -3,6 +3,7 @@ package com.uraneptus.glowworms.common.blocks;
 import com.uraneptus.glowworms.core.registry.BlockInit;
 import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
 import net.minecraft.block.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -11,17 +12,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.List;
 import java.util.Random;
 
 public class GlowwormsTopBlock extends AbstractTopPlantBlock {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public GlowwormsTopBlock(AbstractBlock.Properties properties) {
-        super(properties.lightLevel((p_235455_0_) -> 5), Direction.DOWN, SHAPE, false, 0.1D);
+        super(properties.lightLevel((p_235455_0_) -> 8), Direction.DOWN, SHAPE, false, 0.8D);
     }
 
     public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(BlockInit.BlockTags.CAN_PLACE_GLOWWORM);
+        /*List blockTags = BlockInit.BlockTags.CAN_PLACE_GLOWWORM.getValues();
+        System.out.println(blockTags);
+        System.out.println("Called canSurvive method");*/
+        return pLevel.getBlockState(pPos.above()).is(BlockInit.BlockTags.CAN_PLACE_GLOWWORM);
     }
 
     protected int getBlocksToGrowWhenBonemealed(Random random) {
