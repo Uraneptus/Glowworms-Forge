@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "glowworms:block/glowworms"
+    "layer0": "glowworms:block/gloworms_hanging"
   }
 }

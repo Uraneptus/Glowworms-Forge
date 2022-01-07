@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {"model": "glowworms:block/glowworms_end_0"},
+      {"model": "glowworms:block/glowworms_end_1"},
+      {"model": "glowworms:block/glowworms_end_2"}
+    ]
+  }
+}

@@ -1,7 +1,6 @@
 package com.uraneptus.glowworms;
 
 import com.uraneptus.glowworms.core.registry.BlockInit;
-import com.uraneptus.glowworms.core.registry.FeatureInit;
 import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -39,8 +38,9 @@ public class GlowwormsMod
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(BlockInit.GLOWWORMS.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(BlockInit.GLOWWORMS_TOP.get(), RenderType.translucent());
-
+        ItemBlockRenderTypes.setRenderLayer(BlockInit.GLOWWORMS_CEILING.get(), RenderType.tripwire());
+        ItemBlockRenderTypes.setRenderLayer(BlockInit.GLOWWORMS_HANGING.get(), RenderType.tripwire());
+        ItemBlockRenderTypes.setRenderLayer(BlockInit.GLOWWORMS_END.get(), RenderType.tripwire());
+         //Instead transparent use tripwire
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "glowworms:block/glowworms_end_1"
+  }
+}

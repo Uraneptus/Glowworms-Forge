@@ -18,10 +18,10 @@ import net.minecraft.world.level.block.NetherVines;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class GlowwormsTopBlock extends GrowingPlantHeadBlock {
+public class GlowwormsEndBlock extends GrowingPlantHeadBlock {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    public GlowwormsTopBlock(BlockBehaviour.Properties properties) {
+    public GlowwormsEndBlock(BlockBehaviour.Properties properties) {
         super(properties.lightLevel((p_235455_0_) -> 8), Direction.DOWN, SHAPE, false, 0.8D);
     }
 
@@ -37,7 +37,7 @@ public class GlowwormsTopBlock extends GrowingPlantHeadBlock {
     }
 
     protected Block getBodyBlock() {
-        return BlockInit.GLOWWORMS.get();
+        return BlockInit.GLOWWORMS_HANGING.get();
     }
 
     protected boolean canGrowInto(BlockState state) {

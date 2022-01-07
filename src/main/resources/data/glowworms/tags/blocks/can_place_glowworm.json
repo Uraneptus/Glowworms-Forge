@@ -2,7 +2,8 @@
   "replace": false,
   "values": [
     "glowworms:glowworm_infested_stone",
-    "glowworms:glowworms",
-    "glowworms:glowworms_top"
+    "glowworms:glowworms_ceiling",
+    "glowworms:gloworms_hanging",
+    "glowworms:glowworms_end"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "glowworms:block/glowworms"
+    "cross": "glowworms:block/gloworms_hanging"
   }
 }
