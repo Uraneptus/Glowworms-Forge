@@ -2,27 +2,30 @@ package com.uraneptus.glowworms.common.blocks;
 
 import com.uraneptus.glowworms.core.registry.BlockInit;
 import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
-import net.minecraft.block.*;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.List;
 import java.util.Random;
 
-public class GlowwormsTopBlock extends AbstractTopPlantBlock {
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.NetherVines;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class GlowwormsTopBlock extends GrowingPlantHeadBlock {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    public GlowwormsTopBlock(AbstractBlock.Properties properties) {
+    public GlowwormsTopBlock(BlockBehaviour.Properties properties) {
         super(properties.lightLevel((p_235455_0_) -> 8), Direction.DOWN, SHAPE, false, 0.8D);
     }
 
-    public boolean canSurvive(BlockState pState, IWorldReader pLevel, BlockPos pPos) {
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         /*List blockTags = BlockInit.BlockTags.CAN_PLACE_GLOWWORM.getValues();
         System.out.println(blockTags);
         System.out.println("Called canSurvive method");*/
@@ -30,7 +33,7 @@ public class GlowwormsTopBlock extends AbstractTopPlantBlock {
     }
 
     protected int getBlocksToGrowWhenBonemealed(Random random) {
-        return PlantBlockHelper.getBlocksToGrowWhenBonemealed(random);
+        return NetherVines.getBlocksToGrowWhenBonemealed(random);
     }
 
     protected Block getBodyBlock() {
@@ -38,11 +41,11 @@ public class GlowwormsTopBlock extends AbstractTopPlantBlock {
     }
 
     protected boolean canGrowInto(BlockState state) {
-        return PlantBlockHelper.isValidGrowthState(state);
+        return NetherVines.isValidGrowthState(state);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         if (random.nextInt(5) == 0) {
             Direction direction = Direction.getRandom(random);
             if (direction != Direction.UP) {

@@ -2,32 +2,32 @@ package com.uraneptus.glowworms.client.particles;
 
 import com.uraneptus.glowworms.core.registry.ParticleTypeInit;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.IParticleData;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class GlowGooParticle extends SpriteTexturedParticle {
+public class GlowGooParticle extends TextureSheetParticle {
     private final Fluid fluid;
     protected boolean isGlowing;
     float r = 0.20F;
     float g = 1.00F;
     float b = 0.87F;
 
-    public GlowGooParticle(ClientWorld world, double x, double y, double z, Fluid fluid) {
+    public GlowGooParticle(ClientLevel world, double x, double y, double z, Fluid fluid) {
         super(world, x, y, z);
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
         this.fluid = fluid;
     }
 
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
     public int getLightColor(float lightcolor) {
@@ -75,7 +75,7 @@ public class GlowGooParticle extends SpriteTexturedParticle {
     //Falling Nectar [necessary for Falling Particles]
     @OnlyIn(Dist.CLIENT)
     static class FallingNectarParticle extends GlowGooParticle {
-        private FallingNectarParticle(ClientWorld world, double x, double y, double z, Fluid fluid) {
+        private FallingNectarParticle(ClientLevel world, double x, double y, double z, Fluid fluid) {
             super(world, x, y, z, fluid);
             this.lifetime = (int)(64.0D / (Math.random() * 0.8D + 0.2D));
         }
@@ -92,9 +92,9 @@ public class GlowGooParticle extends SpriteTexturedParticle {
     //DRIPPING
     @OnlyIn(Dist.CLIENT)
     static class Dripping extends GlowGooParticle {
-        private final IParticleData fallingParticle;
+        private final ParticleOptions fallingParticle;
 
-        private Dripping(ClientWorld world, double x, double y, double z, Fluid fluid, IParticleData data) {
+        private Dripping(ClientLevel world, double x, double y, double z, Fluid fluid, ParticleOptions data) {
             super(world, x, y, z, fluid);
             this.fallingParticle = data;
             this.gravity *= 0.02F;
@@ -116,14 +116,14 @@ public class GlowGooParticle extends SpriteTexturedParticle {
         }
     }
     @OnlyIn(Dist.CLIENT)
-    public static class DrippingGlowGooFactory implements IParticleFactory<BasicParticleType> {
-        protected final IAnimatedSprite sprite;
+    public static class DrippingGlowGooFactory implements ParticleProvider<SimpleParticleType> {
+        protected final SpriteSet sprite;
 
-        public DrippingGlowGooFactory(IAnimatedSprite sprite) {
+        public DrippingGlowGooFactory(SpriteSet sprite) {
             this.sprite = sprite;
         }
 
-        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xV, double yV, double zV) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double xV, double yV, double zV) {
             Dripping glowgooparticle$dripping = new Dripping(world, x, y, z, Fluids.EMPTY, ParticleTypeInit.FALLING_GLOW_GOO.get());
             glowgooparticle$dripping.isGlowing = true;
             glowgooparticle$dripping.gravity *= 0.01F;
@@ -138,9 +138,9 @@ public class GlowGooParticle extends SpriteTexturedParticle {
     //FALLING
     @OnlyIn(Dist.CLIENT)
     public static class FallingLiquidParticle extends FallingNectarParticle {
-        protected final IParticleData landParticle;
+        protected final ParticleOptions landParticle;
 
-        public FallingLiquidParticle(ClientWorld world, double x, double y, double z, Fluid fluid, IParticleData data) {
+        public FallingLiquidParticle(ClientLevel world, double x, double y, double z, Fluid fluid, ParticleOptions data) {
             super(world, x, y, z, fluid);
             this.landParticle = data;
         }
@@ -154,14 +154,14 @@ public class GlowGooParticle extends SpriteTexturedParticle {
         }
     }
     @OnlyIn(Dist.CLIENT)
-    public static class FallingGlowGooFactory implements IParticleFactory<BasicParticleType> {
-        protected final IAnimatedSprite sprite;
+    public static class FallingGlowGooFactory implements ParticleProvider<SimpleParticleType> {
+        protected final SpriteSet sprite;
 
-        public FallingGlowGooFactory(IAnimatedSprite sprite) {
+        public FallingGlowGooFactory(SpriteSet sprite) {
             this.sprite = sprite;
         }
 
-        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xV, double yV, double zV) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double xV, double yV, double zV) {
             GlowGooParticle glowgooparticle = new FallingLiquidParticle(world, x, y, z, Fluids.EMPTY, ParticleTypeInit.LANDING_GLOW_GOO.get());
             glowgooparticle.isGlowing = true;
             glowgooparticle.gravity = 0.01F;
@@ -175,20 +175,20 @@ public class GlowGooParticle extends SpriteTexturedParticle {
     //LANDING PARTICLE
     @OnlyIn(Dist.CLIENT)
     static class Landing extends GlowGooParticle {
-        private Landing(ClientWorld world, double x, double y, double z, Fluid fluid) {
+        private Landing(ClientLevel world, double x, double y, double z, Fluid fluid) {
             super(world, x, y, z, fluid);
             this.lifetime = (int)(16.0D / (Math.random() * 0.8D + 0.2D));
         }
     }
     @OnlyIn(Dist.CLIENT)
-    public static class LandingGlowGooFactory implements IParticleFactory<BasicParticleType> {
-        protected final IAnimatedSprite sprite;
+    public static class LandingGlowGooFactory implements ParticleProvider<SimpleParticleType> {
+        protected final SpriteSet sprite;
 
-        public LandingGlowGooFactory(IAnimatedSprite sprite) {
+        public LandingGlowGooFactory(SpriteSet sprite) {
             this.sprite = sprite;
         }
 
-        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xV, double yV, double zV) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double xV, double yV, double zV) {
             GlowGooParticle glowgooparticle = new Landing(world, x, y, z, Fluids.EMPTY);
             glowgooparticle.isGlowing = true;
             glowgooparticle.lifetime = (int)(28.0D / (Math.random() * 0.8D + 0.2D));

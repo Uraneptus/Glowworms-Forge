@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[36,)" #mandatory
+loaderVersion="[39,)" #mandatory
 license="GNU General Public License"
 
 [[mods]] #mandatory
@@ -16,12 +16,12 @@ description = '''
 [[dependencies.glowworms]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[36,)" #mandatory
+    versionRange="[39,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.glowworms]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.18.1,)"
     ordering="NONE"
     side="BOTH"

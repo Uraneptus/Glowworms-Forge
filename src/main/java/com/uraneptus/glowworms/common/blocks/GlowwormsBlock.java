@@ -1,17 +1,13 @@
 package com.uraneptus.glowworms.common.blocks;
 
 import com.uraneptus.glowworms.core.registry.BlockInit;
-import net.minecraft.block.AbstractBodyPlantBlock;
-import net.minecraft.block.AbstractTopPlantBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.level.block.GrowingPlantBodyBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class GlowwormsBlock extends AbstractBodyPlantBlock {
+public class GlowwormsBlock extends GrowingPlantBodyBlock {
     public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public GlowwormsBlock(Properties properties) {
@@ -19,7 +15,7 @@ public class GlowwormsBlock extends AbstractBodyPlantBlock {
     }
 
     @Override
-    protected AbstractTopPlantBlock getHeadBlock() {
-        return (AbstractTopPlantBlock) BlockInit.GLOWWORMS_TOP.get();
+    protected GrowingPlantHeadBlock getHeadBlock() {
+        return (GrowingPlantHeadBlock) BlockInit.GLOWWORMS_TOP.get();
     }
 }
